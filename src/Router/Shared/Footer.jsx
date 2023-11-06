@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="px-4 divide-y ">
+    <footer className="px-4 divide-y bg-[#e8e8e8] dark:text-[#e8e8e8] dark:bg-[#171524]">
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
         <div className="lg:w-1/3">
-          <a
-            rel="noopener noreferrer"
-            href="#"
+          <Link
+            to="/"
             className="flex justify-center space-x-3 lg:justify-start">
             <div className="flex items-center justify-center w-12 h-12 ">
               <img src="/src/assets/bird_2.png" alt="ShareSphere" />
@@ -13,11 +14,11 @@ const Footer = () => {
             <span className="self-center text-2xl font-semibold">
               ShareSphere
             </span>
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="tracki uppercase ">Product</h3>
+            <h3 className=" uppercase ">Product</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
@@ -42,7 +43,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="tracki uppercase ">Company</h3>
+            <h3 className=" uppercase ">Company</h3>
             <ul className="space-y-1">
               <li>
                 <a rel="noopener noreferrer" href="#">
@@ -121,7 +122,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="py-6 text-sm text-center dark:text-gray-400">
+      <div className="py-6 text-sm text-center ">
         © 1968 Company Co. All rights reserved.
       </div>
     </footer>
