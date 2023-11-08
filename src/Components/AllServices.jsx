@@ -27,7 +27,7 @@ const AllServices = () => {
             </svg>
           </form>
         </div>
-        <div className="">
+        <div className="flex flex-col gap-5">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
@@ -56,8 +56,8 @@ const AllServices = () => {
                 <p className="text-lg">Service Price</p>
 
                 <div className="card-actions justify-end">
-                  <button className="btn btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
-                    Watch
+                  <button className="btn btn-xs sm:btn-sm md:btn-md">
+                    View Detail
                   </button>
                 </div>
               </div>
