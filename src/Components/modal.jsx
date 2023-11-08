@@ -67,13 +67,16 @@ const Modal = () => {
                       <ModalContent />
                       <div className="mt-2 flex flex-col md:flex-row lg:flex-row sm:items-center justify-center">
                         <img
-                          className="max-w-[450px] w-auto rounded-lg h-[350px]  md:w-[300px] md:h-[250px] lg:w-[400px] lg:h-[300px]"
+                          className="w-full max-w-[450px] h-auto rounded-lg mx-auto md:max-w-[300px] lg:max-w-[400px]"
                           src="https://cdn.discordapp.com/attachments/1117395893071654962/1128374995706466335/cLBL8Eb.jpg?ex=6553ac1b&is=6541371b&hm=c6e18db9cedddbca750e584d6bbbead9b83fd2609159c3dc21d6e5ade125c83b&"
                           alt="Food Image"
                         />
-                        <div className="mt-4 md:ml-4 lg:ml-4">
-                          <h1 className="text-2xl font-bold">Food</h1>
-                          <p className="mt-2">
+
+                        <div className="mt-4 md:mt-0 md:ml-4 lg:ml-4">
+                          <h1 className="text-2xl font-bold text-center md:text-left lg:text-left">
+                            Food
+                          </h1>
+                          <p className="mt-2 text-center md:text-left lg:text-left">
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Praesentium ipsum aperiam asperiores
                             repudiandae nam nulla reiciendis voluptatibus dolor
