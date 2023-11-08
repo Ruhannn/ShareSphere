@@ -4,7 +4,9 @@ import Login from "../LogIn_SignUp/Login";
 import Home from "../Home/Home";
 import SignUp from "../LogIn_SignUp/SignUp";
 import AllServices from "../Components/allServices";
-import Photooo from "../Components/FAdf";
+import MyServices from "../Components/MyServices";
+import MySchedules from "../Components/MySchedules";
+import AddServices from "../Components/AddServices";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
-      }
-      ,
+      },
       {
         path: "/signup",
         element: <SignUp></SignUp>,
@@ -29,8 +30,16 @@ const router = createBrowserRouter([
         element: <AllServices></AllServices>,
       },
       {
-        path: "/Photooo",
-        element: <Photooo></Photooo>,
+        path: "/my-services",
+        element: <MyServices></MyServices>,
+      },
+      {
+        path: "/add-services",
+        element: <AddServices></AddServices>,
+      },
+      {
+        path: "my-schedules",
+        element: <MySchedules></MySchedules>,
       },
     ],
   },

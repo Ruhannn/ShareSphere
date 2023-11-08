@@ -1,4 +1,4 @@
-import "./AllServices.css";
+
 const AllServices = () => {
   return (
     <>

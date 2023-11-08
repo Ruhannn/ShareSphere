@@ -7,7 +7,7 @@ import { AuthContext } from "../../Provider/AuthContext";
 
 const NavBar = () => {
   const { logOut, user } = useContext(AuthContext);
-  const NavItem = ["Services", "Dashboard"];
+
   const NavLinks = (
     <>
       <NavLink to="/">
@@ -15,14 +15,11 @@ const NavBar = () => {
           <a>Home</a>
         </li>
       </NavLink>
-      {NavItem.map((item, index) => (
-        <NavLink key={index} to={`/${item.toLowerCase()}`}>
-          <li>
-            <a>{item}</a>
-          </li>
-        </NavLink>
-      ))}
-
+      <NavLink to="/all-services">
+        <li>
+          <a>Services</a>
+        </li>
+      </NavLink>
       <NavLink to="/signup" className="block md:hidden lg:hidden">
         <li>
           <a>Signup</a>
@@ -33,6 +30,23 @@ const NavBar = () => {
           <a>Login</a>
         </li>
       </NavLink>
+      <li >
+        <details className="dark:bg-[#5e5a66] dark:text-white">
+          <summary>Dashboard</summary>
+          <ul className="p-2 bg-base-100 dark:text-white dark:bg-[#5e5a66]">
+            <li>
+              <Link to="/my-services">My services</Link>
+            </li>
+            <li>
+              <Link to="/add-services">Add services</Link>
+            </li>
+            <li>
+              <Link to="my-schedules"
+              >My schedules</Link>
+            </li>
+          </ul>
+        </details>
+      </li>
     </>
   );
 
