@@ -8,9 +8,12 @@ import { BsGoogle } from "react-icons/bs";
 
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthContext";
+import { useState } from "react";
 
 const SignUp = () => {
-  const { createUser, setLoading, googleSignIn } = useContext(AuthContext);
+  const [imgUrl, setImgUrl] = useState("");
+  const { createUser, setLoading, googleSignIn, handleUpdateProfile } =
+    useContext(AuthContext);
   const handleGoogle = () => {
     googleSignIn()
       .then(() => {
@@ -24,9 +27,28 @@ const SignUp = () => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
+    const name = form.get("name");
     const password = form.get("password");
-    const photo = form.get("photo");
-    console.log("handleSignUp  photo", photo);
+    const photoField = form.get("photoField");
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_API_SECRET
+    }`;
+    const image = photoField;
+    if (image) {
+      const formData = new FormData();
+      formData.append("image", image);
+
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const photoUrl = data.data.display_url;
+          console.log(photoUrl);
+          setImgUrl(photoUrl);
+        });
+    }
     if (password.length < 0) {
       toast.error("give your password");
       return;
@@ -43,11 +65,14 @@ const SignUp = () => {
       toast.error("Password should contain at least one special character");
       return;
     }
-
     createUser(email, password)
-      .then((result) => {
-        setLoading(false);
-        toast.success("Secure Access, Unlimited Smiles!", { theme: "dark" });
+      .then((res) => {
+        console.log(res)
+        const imageLink = imgUrl;
+        handleUpdateProfile(name, imageLink).then(() => {
+          toast.success("Secure Access, Unlimited Smiles!", { theme: "dark" });
+          setLoading(false);
+        });
       })
       .catch((error) => {
         console.log("handleSignUp  error", error);
@@ -57,7 +82,8 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="hero min-h-screen transition-colors duration-300 bg-[url('https://i.ibb.co/jVhskCW/milad-fakurian-Uii-HVEyxty-A-unsplash.jpg')] 
+    <div
+      className="hero min-h-screen transition-colors duration-300 bg-[url('https://i.ibb.co/jVhskCW/milad-fakurian-Uii-HVEyxty-A-unsplash.jpg')] 
     dark:bg-[url('https://i.ibb.co/2v34K0P/adrien-olichon-GH9-Lwhl-SO4-unsplash.jpg')]">
       <div className="hero-overlay bg-opacity-40"></div>
       <div className="hero-content text-center text-neutral-content">
@@ -69,6 +95,32 @@ const SignUp = () => {
           </p>
           <div className="card flex-shrink-0 w-full lg:w-[600px] max-w-sm shadow-2xl bg-transparent backdrop-blur-sm">
             <form className="card-body" onSubmit={handleSignUp}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text dark:text-[#ffffffc6]">
+                    Username
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Username"
+                  className="input input-bordered dark:bg-[#44475a]"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text dark:text-[#ffffffc6]">
+                    Photo
+                  </span>
+                </label>
+                <input
+                  type="file"
+                  name="photoField"
+                  className="file-input w-full max-w-xs border-none text-black dark:bg-[#44475A] dark:text-[#ffffffc6]"
+                />
+              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text dark:text-[#ffffffc6]">
@@ -95,7 +147,6 @@ const SignUp = () => {
                   className="input input-bordered  dark:bg-[#44475a]"
                 />
                 <p className="text-black dark:text-white">
-                  
                   Already have an account,
                   <Link to="/login" className="btn px-1 p-0 btn-link">
                     Log In

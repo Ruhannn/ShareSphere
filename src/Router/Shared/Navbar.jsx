@@ -159,6 +159,9 @@ const NavBar = () => {
                     tabIndex={0}
                     className="menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-gray-600-200 dark:bg-[#282a36] dark:text-[#f8f8f2] dark:hover:text-[#bfbf6c] rounded-box w-52">
                     <li>
+                      <a className="justify-between">{user.displayName}</a>
+                    </li>
+                    <li>
                       <a className="justify-between">{user.email}</a>
                     </li>
 

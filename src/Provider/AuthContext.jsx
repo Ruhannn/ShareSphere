@@ -7,9 +7,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
-
 
 export const AuthContext = createContext(null);
 
@@ -27,7 +27,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-
+  const handleUpdateProfile = ( name , imageLink) =>{
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: imageLink,
+    });
+  }
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -62,6 +67,7 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     googleSignIn,
+    handleUpdateProfile
   };
 
   return (
