@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import Banner from "../Components/Banner";
 import Services from "../Components/Services";
 import useTitle from "../hook/useTitle";
+import Gallery from "../Components/Gallery";
+import FAQ from "../Components/FAQ";
+import Team from "../Components/Team";
+
 const Home = () => {
   useTitle("Home");
   return (
@@ -22,6 +26,15 @@ const Home = () => {
           </Link>
         </div>
       </div>
+      <section>
+        <Gallery></Gallery>
+      </section>
+      <section>
+        <Team></Team>
+      </section>
+      <section>
+        <FAQ></FAQ>
+      </section>
     </>
   );
 };
