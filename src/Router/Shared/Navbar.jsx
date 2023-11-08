@@ -163,8 +163,7 @@ const NavBar = () => {
                     <div className="w-10 rounded-full dark:bg-white">
                       <img
                         src={
-                          user?.photoURL ||
-                          "https://cdn.discordapp.com/attachments/1071386240252907530/1159863528178602014/CSblg2s.png?ex=65329216&is=65201d16&hm=c2d495cbda530a4c9f6a2b697ffe37b31796eba26dde9f73e3a16e644ff18f5c&"
+                          user?.photoURL
                         }
                       />
                     </div>

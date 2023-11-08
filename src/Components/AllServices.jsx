@@ -1,5 +1,7 @@
+import useTitle from "../hook/useTitle";
 
 const AllServices = () => {
+  useTitle("All Services");
   return (
     <>
       <div className="min-h-screen max-w-7xl mx-auto">

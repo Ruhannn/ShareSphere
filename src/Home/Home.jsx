@@ -13,11 +13,11 @@ const Home = () => {
       <div>
         <Banner></Banner>
       </div>
-      <div className="min-h-screen max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h1 className="text-center font-extrabold text-5xl my-8 text-blue-500">
           Available services
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 mx-5 items-center justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 items-center justify-center mx-auto p-3">
           <Services></Services>
         </div>
         <div className="flex justify-center my-10">

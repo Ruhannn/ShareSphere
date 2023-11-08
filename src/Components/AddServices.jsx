@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import { useState } from "react";
-
+import useTitle from "../hook/useTitle";
 const AddProduct = () => {
+  useTitle("Add Service");
   const sty = `input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }`;
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }`;
 
   const textareaRef = useRef(null);
   const [value, setValue] = useState("");
@@ -21,8 +22,8 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     pictureUrl: "",
     serviceName: "",
-    yourName: "", 
-    yourEmail: "", 
+    yourName: "",
+    yourEmail: "",
     price: "",
     serviceArea: "",
     description: "",

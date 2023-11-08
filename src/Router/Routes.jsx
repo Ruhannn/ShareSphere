@@ -3,10 +3,13 @@ import Main from "../Layout/Main";
 import Login from "../LogIn_SignUp/Login";
 import Home from "../Home/Home";
 import SignUp from "../LogIn_SignUp/SignUp";
-import AllServices from "../Components/allServices";
+
 import MyServices from "../Components/MyServices";
 import MySchedules from "../Components/MySchedules";
 import AddServices from "../Components/AddServices";
+import AllServices from "../Components/AllServices";
+import SingleService from "../Components/SingleService";
+import Modal from "../Components/modal";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: "my-schedules",
         element: <MySchedules></MySchedules>,
+      },
+      {
+        path: "Redstonelamp",
+        element: <SingleService></SingleService>,
+      },
+      {
+        path: "modal",
+        element: <Modal></Modal>,
       },
     ],
   },
