@@ -9,7 +9,7 @@ import MySchedules from "../Components/MySchedules";
 import AddServices from "../Components/AddServices";
 import AllServices from "../Components/AllServices";
 import SingleService from "../Components/SingleService";
-import Modal from "../Components/modal";
+
 
 const router = createBrowserRouter([
   {
@@ -48,10 +48,10 @@ const router = createBrowserRouter([
         path: "Redstonelamp",
         element: <SingleService></SingleService>,
       },
-      {
-        path: "modal",
-        element: <Modal></Modal>,
-      },
+      // {
+      //   path: "modal",
+      //   element: <Modal></Modal>,
+      // },
     ],
   },
 ]);

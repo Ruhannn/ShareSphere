@@ -1,3 +1,4 @@
+
 import { DatePicker, Space, Button } from "antd";
 
 const ModalContent = () => {
@@ -6,7 +7,7 @@ const ModalContent = () => {
   };
 
   return (
-    <div className="p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center">
+    <div className="p-6 sm:p-8 md:p-10 lg:p-12 dark:text-[#ffffffc4] xl:p-16 flex flex-col text-black  justify-center">
       <h2 className="text-xl sm:text-2xl font-semibold mb-4">
         Booking Details
       </h2>
@@ -29,11 +30,11 @@ const ModalContent = () => {
       <div className="mb-4">
         <p className="mb-2 font-bold">Select Date:</p>
         <Space direction="vertical">
-          <DatePicker onChange={onChange} />
+          <DatePicker className=" dark:bg-[#393658]" onChange={onChange} />
         </Space>
       </div>
       <div className="mt-auto">
-        <Button type="default" size="large" block>
+        <Button type="default" className="dark:text-[#ffffffed]" size="large" block>
           Book Now
         </Button>
       </div>

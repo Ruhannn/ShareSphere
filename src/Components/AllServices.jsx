@@ -27,21 +27,42 @@ const AllServices = () => {
             </svg>
           </form>
         </div>
-        <div className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row">
-          <figure>
-            <img
-              src="https://cdn.discordapp.com/attachments/1089969086190075994/1170318565686116452/GY5E97A.png?ex=65589b19&is=65462619&hm=1ca84a7d32b4f99ce89d0b3b088c4689b6d5cdf07f1ef43c6ae32527f4423a1a&"
-              alt="Movie"
-              className="rounded-xl md:rounded-none lg:rounded-none"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">New movie is released!</h2>
-            <p>Click the button to watch on Jetflix app.</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Watch</button>
+        <div className="">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div
+              key={index}
+              className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row">
+              <figure key={index}>
+                <img
+                  src="https://cdn.discordapp.com/attachments/1089969086190075994/1170318565686116452/GY5E97A.png?ex=65589b19&is=65462619&hm=1ca84a7d32b4f99ce89d0b3b088c4689b6d5cdf07f1ef43c6ae32527f4423a1a&"
+                  alt="Movie"
+                  className="rounded-xl md:rounded-none h-full w-full object-cover lg:rounded-none"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">New movie is released!</h2>
+                <p>Click the button to watch on Jetflix app.</p>
+                <div className="avatar mt-4 indicator">
+                  <span className="indicator-item badge">Ayaka</span>
+                  <div className="w-16 rounded-full">
+                    <img
+                      src="https://cdn.discordapp.com/attachments/1065689957525630997/1165311376386957432/q5GjuZ2.png?ex=6558d8ca&is=654663ca&hm=e447efa03ee793ab7357ac64d6349014115df6bab66d6635e0fda4a71ac9bf1d"
+                      alt="Ayaka's Avatar"
+                    />
+                  </div>
+                </div>
+
+                <p className="text-2xl font-bold mb-2">Service Area</p>
+                <p className="text-lg">Service Price</p>
+
+                <div className="card-actions justify-end">
+                  <button className="btn btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">
+                    Watch
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </>
