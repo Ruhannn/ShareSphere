@@ -80,7 +80,7 @@ const Services = () => {
 
               <div className="space-x-2">
                 <Link
-                to={`service-details/${service._id}`}
+                to={`all-services/service/${service._id}`}
                   type="button"
                   className="flex px-5 py-2 items-center rounded-md uppercase bg-[#0d0b28] space-x-1.5">
                   view details

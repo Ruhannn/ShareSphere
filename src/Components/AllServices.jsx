@@ -3,6 +3,7 @@ import useTitle from "../hook/useTitle";
 import axios from "axios";
 import Loading from "./Loading";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const AllServices = () => {
   useTitle("All Services");
@@ -101,11 +102,12 @@ const AllServices = () => {
                   <span className="font-bold">{service.price}</span>
                 </p>
                 <div className="card-actions justify-end">
-                  <button
+                  <Link
+                    to={`service/${service._id}`}
                     onClick={showAllServices}
                     className="btn btn-xs sm:btn-sm md:btn-md">
                     View Detail
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

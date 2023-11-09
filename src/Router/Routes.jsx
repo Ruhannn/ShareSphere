@@ -44,14 +44,16 @@ const router = createBrowserRouter([
         element: <MySchedules></MySchedules>,
       },
       {
-        path: "Redstonelamp",
-        element: <SingleService></SingleService>,
-      },
-      {
-        path: "service-details/:id",
+        path: "/all-services/service/:id",
         element: <SingleService></SingleService>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_BACK_END_API}/service/${params?.id}`),
+      },
+      {
+        path: "/update-service/:id",
+        element: ,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_BACK_END_API}/update-service/${params?.id}`),
       },
     ],
   },
