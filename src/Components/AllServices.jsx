@@ -1,19 +1,44 @@
 import { useState } from "react";
 import useTitle from "../hook/useTitle";
 import axios from "axios";
+import Loading from "./Loading";
+import { useEffect } from "react";
 
 const AllServices = () => {
   useTitle("All Services");
   const [services, setServices] = useState([]);
-  axios
-    .get(`${import.meta.env.VITE_BACK_END_API}/services`)
-    .then((res) => {
-      setServices(res.data);
-      console.log(services);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const [loading, setLoading] = useState(true);
+  const [displayedServices, setDisplayedServices] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACK_END_API}/services`
+        );
+        setServices(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setDisplayedServices(services.slice(0, 6));
+  }, [services]);
+
+  const showAllServices = () => {
+    setDisplayedServices(services);
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="min-h-screen max-w-7xl mx-auto mt-9">
@@ -30,7 +55,8 @@ const AllServices = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth="2">
+              strokeWidth="2"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -40,10 +66,11 @@ const AllServices = () => {
           </form>
         </div>
         <div className="flex flex-col gap-5 my-8">
-          {services.map((service) => (
+          {displayedServices.map((service) => (
             <div
               key={service._id}
-              className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row">
+              className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row"
+            >
               <figure>
                 <img
                   src={service.pictureUrl}
@@ -66,17 +93,18 @@ const AllServices = () => {
                     />
                   </div>
                 </div>
-
                 <p className="text-2xl font-bold mb-2">
                   Service Area: <span>{service.serviceArea}</span>
                 </p>
                 <p className="text-lg">
                   Service Price:
-                   <span className="font-bold">{service.price}</span>
+                  <span className="font-bold">{service.price}</span>
                 </p>
-
                 <div className="card-actions justify-end">
-                  <button className="btn btn-xs sm:btn-sm md:btn-md">
+                  <button
+                    onClick={showAllServices}
+                    className="btn btn-xs sm:btn-sm md:btn-md"
+                  >
                     View Detail
                   </button>
                 </div>
@@ -84,8 +112,11 @@ const AllServices = () => {
             </div>
           ))}
         </div>
-        <div className="flex justify-center mt-4">
-          <button className="btn btn-xs sm:btn-sm md:btn-md">
+        <div className="flex justify-center my-20">
+          <button
+            onClick={showAllServices}
+            className="btn btn-xs sm:btn-sm md:btn-md"
+          >
             All Services
           </button>
         </div>

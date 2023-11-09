@@ -15,9 +15,9 @@ const Home = () => {
       </div>
       <div className="max-w-7xl mx-auto">
         <h1 className="text-center font-extrabold text-5xl my-8 text-blue-500">
-          Available services
+          Popular services
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 items-center justify-center mx-auto p-3">
+        <div>
           <Services></Services>
         </div>
         <div className="flex justify-center my-10">
