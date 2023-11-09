@@ -1,11 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useContext } from "react";
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 import { BsGoogle } from "react-icons/bs";
-
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthContext";
 import { useState } from "react";
@@ -49,7 +46,6 @@ const SignUp = () => {
         .then((res) => res.json())
         .then((data) => {
           const photoUrl = data.data.display_url;
-          console.log(photoUrl);
           setImgUrl(photoUrl);
         });
     }
@@ -74,12 +70,13 @@ const SignUp = () => {
         console.log(res);
         const imageLink = imgUrl;
         handleUpdateProfile(name, imageLink).then(() => {
+          navigate(from, { replace: true });
           toast.success("Secure Access, Unlimited Smiles!", { theme: "dark" });
           setLoading(false);
         });
       })
       .catch((error) => {
-        console.log("handleSignUp  error", error);
+        console.log(error);
         if (error.code === "auth/email-already-in-use") {
           toast.error("Email exist already, Please try with a new email.");
         }

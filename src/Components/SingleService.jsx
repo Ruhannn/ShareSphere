@@ -1,18 +1,17 @@
 import { FaBook } from "react-icons/fa";
-import ModalContent from "./modalContent";
+
 import { useState } from "react";
+import ModalContent from "./ModalContent";
 
 const SingleService = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
-    console.log("Modal opened. isOpen:", isOpen);
   };
   
   const closeModal = () => {
     setIsOpen(false);
-    console.log("Modal closed. isOpen:", isOpen);
   };
   
   return (
