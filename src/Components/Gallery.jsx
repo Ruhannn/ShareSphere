@@ -48,7 +48,7 @@ const Gallery = () => {
           src="https://img.freepik.com/free-vector/organic-flat-customer-support-illustration_23-2148899173.jpg"
         />
         <img
-          src="https://img.freepik.com/free-photo/portrait-attractive-asian-delivery-man-blue-t-shirt-cap-happy-smiling_74952-3150.jpg"
+          src="https://images7.alphacoders.com/133/1330652.png"
           alt=""
           className="w-full h-full col-span-2  object-cover row-span-2 rounded shadow-sm min-h-96 md:col-start-1 md:row-start-3 dark:bg-gray-500 aspect-square"
         />

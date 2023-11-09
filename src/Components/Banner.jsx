@@ -14,10 +14,10 @@ const Banner = () => {
       transitionDelay={250}
       mobileTouch={true}
       bullets={false}>
-      <div data-src="https://i.ibb.co/jGw39cC/4419157.jpg" />
-      <div data-src="https://i.ibb.co/V3CBXGL/4452317.jpg" />
-      <div data-src="https://i.ibb.co/qDSp9FQ/4492606.jpg" />
-      <div data-src="https://i.ibb.co/6NP7nL3/5193124.jpg" />
+      <div data-src="https://i.ibb.co/wLLPk7L/peakpx-2.jpg" />
+      <div data-src="https://i.ibb.co/N75LhWC/wp10583237-housekeeping-wallpapers.jpg" />
+      <div data-src="https://i.ibb.co/jr2bnXh/hnst-9ed1-210608.jpg"/>
+      <div data-src="https://wallpapercave.com/wp/wp10583194.jpg" />
     </AutoplaySlider>
   );
 };
