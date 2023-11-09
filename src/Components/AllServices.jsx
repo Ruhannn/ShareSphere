@@ -32,6 +32,8 @@ const AllServices = () => {
   }, [services]);
 
   const showAllServices = () => {
+    const elementToHide = document.getElementById("allbtn");
+    elementToHide.style.display = "none";
     setDisplayedServices(services);
   };
 
@@ -55,8 +57,7 @@ const AllServices = () => {
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth="2"
-            >
+              strokeWidth="2">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -69,8 +70,7 @@ const AllServices = () => {
           {displayedServices.map((service) => (
             <div
               key={service._id}
-              className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row"
-            >
+              className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row">
               <figure>
                 <img
                   src={service.pictureUrl}
@@ -103,8 +103,7 @@ const AllServices = () => {
                 <div className="card-actions justify-end">
                   <button
                     onClick={showAllServices}
-                    className="btn btn-xs sm:btn-sm md:btn-md"
-                  >
+                    className="btn btn-xs sm:btn-sm md:btn-md">
                     View Detail
                   </button>
                 </div>
@@ -114,9 +113,9 @@ const AllServices = () => {
         </div>
         <div className="flex justify-center my-20">
           <button
+            id="allbtn"
             onClick={showAllServices}
-            className="btn btn-xs sm:btn-sm md:btn-md"
-          >
+            className="btn btn-xs sm:btn-sm md:btn-md">
             All Services
           </button>
         </div>

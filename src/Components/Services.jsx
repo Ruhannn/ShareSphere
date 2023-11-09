@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AiOutlineDollar } from "react-icons/ai";
 import Loading from "./Loading";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,11 +79,12 @@ const Services = () => {
               </div>
 
               <div className="space-x-2">
-                <button
+                <Link
+                to={`service-details/${service._id}`}
                   type="button"
                   className="flex px-5 py-2 items-center rounded-md uppercase bg-[#0d0b28] space-x-1.5">
                   view details
-                </button>
+                </Link>
               </div>
             </div>
           </div>

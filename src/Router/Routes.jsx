@@ -10,7 +10,6 @@ import AddServices from "../Components/AddServices";
 import AllServices from "../Components/AllServices";
 import SingleService from "../Components/SingleService";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,10 +47,12 @@ const router = createBrowserRouter([
         path: "Redstonelamp",
         element: <SingleService></SingleService>,
       },
-      // {
-      //   path: "modal",
-      //   element: <Modal></Modal>,
-      // },
+      {
+        path: "service-details/:id",
+        element: <SingleService></SingleService>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_BACK_END_API}/service/${params?.id}`),
+      },
     ],
   },
 ]);

@@ -2,38 +2,38 @@ import { FaBook } from "react-icons/fa";
 
 import { useState } from "react";
 import ModalContent from "./ModalContent";
+import { useLoaderData } from "react-router-dom";
 
 const SingleService = () => {
+  const serviceData = useLoaderData();
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
     setIsOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsOpen(false);
   };
-  
+
   return (
     <div className="m-7">
       {/* main card */}
       <div className="bg-[#cacaca] mb-10 text-black dark:bg-gray-900 dark:text-white p-2 w-auto sm:w-full sm:p-4 sm:h-72 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none">
         <div
           style={{
-            backgroundImage: `url("https://cdn.discordapp.com/attachments/1144906364859195453/1170708938291957831/E3kBnnD.jpg?ex=655a06a9&is=654791a9&hm=ad1d9d3dfe68bf282efb6606bbf56246c431a238301184b74bf51bc6b2c6c6f2&")`,
+            backgroundImage: `url("${serviceData.pictureUrl}")`,
           }}
           className="h-52 sm:h-full sm:w-72 rounded-xl text-black bg-gray-100 bg-center bg-cover"></div>
         <div className="flex sm:flex-1 flex-col gap-2 p-1">
           <h1 className="text-lg sm:text-xl font-semibold text-gray-600 dark:text-white">
-            This is the title for your card. This is really cool
+            {serviceData.serviceName}
           </h1>
           <p
             className="text-gray-500 text-sm 
          mb-7 sm:text-base line-clamp-3 dark:text-white">
-            This is the description for your card. This is really really long.
-            This is used to describe the content of the card. I hope you like
-            the design...
-          </p>{" "}
+            {serviceData.description}
+          </p>
           <div className="flex mt-auto justify-end">
             <button
               onClick={openModal}
@@ -85,23 +85,20 @@ const SingleService = () => {
                             Review Info Before Book
                           </h3>
                           <div className="mt-2 flex flex-col md:flex-row lg:flex-row items-center justify-center">
-                            <ModalContent />
+                            <ModalContent serviceData={serviceData} />
                             <div className="mt-2 flex flex-col md:flex-row lg:flex-row sm:items-center justify-center">
                               <img
                                 className="w-full max-w-[450px] h-auto rounded-lg mx-auto md:max-w-[300px] lg:max-w-[400px]"
-                                src="https://cdn.discordapp.com/attachments/1117395893071654962/1128374995706466335/cLBL8Eb.jpg?ex=6553ac1b&is=6541371b&hm=c6e18db9cedddbca750e584d6bbbead9b83fd2609159c3dc21d6e5ade125c83b&"
+                                src={serviceData.pictureUrl}
                                 alt="Food Image"
                               />
 
                               <div className="mt-4 md:mt-0 md:ml-4 text-black lg:ml-4 dark:text-[#ffffffc6] ">
                                 <h1 className="text-2xl font-bold text-center md:text-left lg:text-left">
-                                  Food
+                                  {serviceData.serviceName}
                                 </h1>
                                 <p className="mt-2 text-center md:text-left lg:text-left">
-                                  Lorem ipsum dolor sit amet consectetur
-                                  adipisicing elit. Praesentium ipsum aperiam
-                                  asperiores repudiandae nam nulla reiciendis
-                                  voluptatibus dolor explicabo exercitationem.
+                                  {serviceData.description}
                                 </p>
                               </div>
                             </div>
@@ -127,23 +124,21 @@ const SingleService = () => {
       {/* 2nd card */}
       <div className="flex flex-col shadow-lg gap-6 bg-gray-300 text-black dark:bg-gray-900 dark:text-white p-6 md:p-12 rounded-lg ">
         <div className="avatar indicator">
-          <span className="indicator-item badge">Ayaka</span>
+          <span className="indicator-item badge">
+            {serviceData.providerName}
+          </span>
           <div className="w-16 rounded-full">
             <img
-              src="https://cdn.discordapp.com/attachments/1065689957525630997/1165311376386957432/q5GjuZ2.png?ex=6558d8ca&is=654663ca&hm=e447efa03ee793ab7357ac64d6349014115df6bab66d6635e0fda4a71ac9bf1d"
-              alt="Ayaka's Avatar"
+              src={serviceData.providerPhoto}
+              alt={serviceData.providerName}
             />
           </div>
         </div>
         <div>
           <h1 className="text-xl font-bold mt-4 md:mt-0">
-            Ooo update Kore nai maybe
+            {serviceData.providerEmail}
           </h1>
-          <p className=" text-lg dark:text-white">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui quasi
-            natus repellendus rem rerum! Recusandae deserunt eveniet odio autem
-            dolorem!
-          </p>
+          <p className=" text-lg dark:text-white">{serviceData.serviceArea}</p>
         </div>
       </div>
 
