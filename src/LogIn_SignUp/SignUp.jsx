@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { BsGoogle } from "react-icons/bs";
 
@@ -11,6 +11,9 @@ import { AuthContext } from "../Provider/AuthContext";
 import { useState } from "react";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
   const [imgUrl, setImgUrl] = useState("");
   const { createUser, setLoading, googleSignIn, handleUpdateProfile } =
     useContext(AuthContext);
@@ -18,6 +21,7 @@ const SignUp = () => {
     googleSignIn()
       .then(() => {
         toast.success("Login successful!");
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
@@ -67,7 +71,7 @@ const SignUp = () => {
     }
     createUser(email, password)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         const imageLink = imgUrl;
         handleUpdateProfile(name, imageLink).then(() => {
           toast.success("Secure Access, Unlimited Smiles!", { theme: "dark" });

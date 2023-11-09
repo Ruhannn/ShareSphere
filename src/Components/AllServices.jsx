@@ -1,11 +1,24 @@
+import { useState } from "react";
 import useTitle from "../hook/useTitle";
 
 const AllServices = () => {
   useTitle("All Services");
+  const [showAll, setShowAll] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
+
+  const servicesToShow = showAll
+    ? Array.from({ length: 4 })
+    : Array.from({ length: 2 });
+
+  const loadAllServices = () => {
+    setShowAll(true);
+    setButtonVisible(false);
+  };
+
   return (
     <>
-      <div className="min-h-screen max-w-7xl mx-auto">
-        <div className="mx-auto max-w-md my-10">
+      <div className="min-h-screen max-w-7xl mx-auto mt-9">
+        <div className="mx-auto max-w-md ">
           <form className="relative mx-auto w-max ">
             <input
               placeholder="Search"
@@ -27,8 +40,8 @@ const AllServices = () => {
             </svg>
           </form>
         </div>
-        <div className="flex flex-col gap-5">
-          {Array.from({ length: 4 }).map((_, index) => (
+        <div className="flex flex-col gap-5 my-8">
+          {servicesToShow.map((_, index) => (
             <div
               key={index}
               className="card card-side bg-base-200 dark:bg-[#4e4a79] dark:text-white shadow-xl mx-12 flex flex-col md:flex-row lg:flex-row">
@@ -64,6 +77,15 @@ const AllServices = () => {
             </div>
           ))}
         </div>
+        {buttonVisible && (
+          <div className="flex justify-center mt-4">
+            <button
+              className="btn btn-xs sm:btn-sm md:btn-md"
+              onClick={loadAllServices}>
+              All Services
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

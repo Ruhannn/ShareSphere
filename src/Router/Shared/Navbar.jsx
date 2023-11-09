@@ -195,7 +195,7 @@ const NavBar = () => {
 
               <ul
                 tabIndex={0}
-                className="dropdown-content gap-5 z-50 menu p-2 shadow dark:bg-[#1A1B26] dark:text-white text-black rounded-box sm:w-full md:w-64 lg:w-72 xl:w-96">
+                className="dropdown-content gap-5 z-50 menu p-2 shadow bg- dark:bg-[#1A1B26] dark:text-white text-black rounded-box sm:w-full md:w-64 lg:w-72 xl:w-96">
                 <Link
                   to="/login"
                   className="py-2 px-4 rounded hover:bg-blue-600 transition duration-300 block">
