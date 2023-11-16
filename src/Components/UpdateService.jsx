@@ -1,13 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-import { useContext ,useRef } from "react";
-import { useState } from "react";
+import { useContext } from "react";
+
 import useTitle from "../hook/useTitle";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Provider/AuthContext";
 import axios from "axios";
-import { Typewriter } from "react-simple-typewriter";
-
-const AddService = () => {
+import { useLoaderData } from "react-router-dom";
+const UpdateService = () => {
   const { user } = useContext(AuthContext);
   useTitle("Add Service");
   const sty = `input::-webkit-outer-spin-button,
@@ -15,15 +13,7 @@ const AddService = () => {
     -webkit-appearance: none;
     margin: 0;
   }`;
-
-  const textareaRef = useRef(null);
-  const [value, setValue] = useState("");
-  const handleChange = (event) => {
-    const textarea = textareaRef.current;
-    setValue(event.target.value);
-    textarea.style.height = "auto";
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  };
+  const singleData = useLoaderData();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +25,20 @@ const AddService = () => {
     const price = form.price.value;
     const serviceArea = form.serviceArea.value;
     const description = form.description.value;
-    const myData = {
+    const isDataChanged =
+      providerName !== singleData.providerName ||
+      providerEmail !== singleData.providerEmail ||
+      pictureUrl !== singleData.pictureUrl ||
+      serviceName !== singleData.serviceName ||
+      price !== singleData.price ||
+      serviceArea !== singleData.serviceArea ||
+      description !== singleData.description;
+
+    if (!isDataChanged) {
+      toast.info("No changes made to the service.");
+      return;
+    }
+    const updatedData = {
       providerPhoto: user?.photoURL,
       providerName,
       providerEmail,
@@ -46,33 +49,22 @@ const AddService = () => {
       description,
     };
     axios
-      .post(`${import.meta.env.VITE_BACK_END_API}/add-service`, myData)
+      .put(
+        `${import.meta.env.VITE_BACK_END_API}/update-service/${singleData._id}`,
+        updatedData
+      )
       .then(() => {
-        toast.success("Service added successfully");
-        form.reset("");
-        setValue("");
-        textareaRef.current.style.height = "auto";
+        toast.success("Service updated successfully");
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Service not added");
+        toast.error("Service not updated");
       });
   };
   return (
     <div className="container mx-auto my-8 p-8 bg-white shadow-lg rounded-lg dark:bg-[#1a1928]">
       <h1 className="text-3xl font-bold mb-6 dark:text-[#ffffffc6]">
-        Add Services
-      </h1>
-      <h1 className="text-xl font-bold mb-6 dark:text-[#ffffffc6]">
-        '
-        <Typewriter
-          words={["Expand", "Enhance", "Diversify", "Innovate"]}
-          loop={9}
-          typeSpeed={70}
-          deleteSpeed={50}
-          delaySpeed={1000}
-        />
-        '
+        Update Services
       </h1>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 ">
@@ -83,6 +75,7 @@ const AddService = () => {
             Picture URL of the Service
           </label>
           <input
+            defaultValue={singleData.pictureUrl}
             type="text"
             name="pictureUrl"
             className="w-full p-2 border border-gray-300 rounded transition focus:outline-none bg-white dark:bg-[#181726] dark:text-white focus:ring focus:border-blue-500"
@@ -98,6 +91,7 @@ const AddService = () => {
             Service Name
           </label>
           <input
+            defaultValue={singleData.serviceName}
             type="text"
             name="serviceName"
             className="w-full bg-white dark:bg-[#181726] dark:text-white p-2 border border-gray-300 rounded transition focus:outline-none focus:ring focus:border-blue-500"
@@ -145,6 +139,7 @@ const AddService = () => {
             Price
           </label>
           <input
+            defaultValue={singleData.price}
             type="number"
             name="price"
             className="w-full bg-white dark:bg-[#181726] dark:text-white p-2 border border-gray-300 rounded transition focus:outline-none focus:ring focus:border-blue-500"
@@ -160,6 +155,7 @@ const AddService = () => {
             Service Area
           </label>
           <input
+            defaultValue={singleData.serviceArea}
             type="text"
             name="serviceArea"
             className="w-full bg-white dark:bg-[#181726] dark:text-white p-2 border border-gray-300 rounded transition focus:outline-none focus:ring focus:border-blue-500"
@@ -176,22 +172,18 @@ const AddService = () => {
           </label>
           <style>{sty}</style>
           <textarea
+            defaultValue={singleData.description}
             name="description"
-            className=" resize-none overflow-hidden w-full p-2 border bg-white dark:bg-[#181726] dark:text-white border-gray-300 rounded transition focus:outline-none focus:ring focus:border-blue-500"
-            placeholder="Enter Description"
-            ref={textareaRef}
             required
-            value={value}
-            onChange={(e) => {
-              handleChange(e);
-            }}></textarea>
+            className=" resize-none overflow-hidden w-full p-2 border bg-white dark:bg-[#181726] dark:text-white border-gray-300 rounded transition focus:outline-none focus:ring focus:border-blue-500"
+            placeholder="Enter Description"></textarea>
         </div>
 
         <div>
           <button
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring focus:border-blue-700">
-            Add Service
+            update Service
           </button>
         </div>
       </form>
@@ -199,4 +191,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateService;

@@ -10,43 +10,49 @@ const NavBar = () => {
 
   const NavLinks = (
     <>
-      <NavLink to="/">
-        <li>
-          <a>Home</a>
-        </li>
-      </NavLink>
-      <NavLink to="/all-services">
-        <li>
-          <a>Services</a>
-        </li>
-      </NavLink>
-      <NavLink to="/signup" className="block md:hidden lg:hidden">
-        <li>
-          <a>Signup</a>
-        </li>
-      </NavLink>
-      <NavLink className="block md:hidden lg:hidden" to="/login">
-        <li>
-          <a>Login</a>
-        </li>
-      </NavLink>
-      <li >
-        <details className="dark:bg-[#5e5a66] dark:text-white">
-          <summary>Dashboard</summary>
-          <ul className="p-2 bg-base-100 dark:text-white dark:bg-[#5e5a66]">
+      {user ? (
+        <>
+          <NavLink to="/">
             <li>
-              <Link to="/my-services">My services</Link>
+              <a>Home</a>
             </li>
+          </NavLink>
+          <NavLink to="/all-services">
             <li>
-              <Link to="/add-services">Add services</Link>
+              <a>Services</a>
             </li>
+          </NavLink>
+          <li>
+            <details className="dark:bg-[#5e5a66] dark:text-white">
+              <summary>Dashboard</summary>
+              <ul className="p-2 bg-base-100 dark:text-white dark:bg-[#5e5a66]">
+                <li>
+                  <Link to="/my-services">My services</Link>
+                </li>
+                <li>
+                  <Link to="/add-services">Add services</Link>
+                </li>
+                <li>
+                  <Link to="/my-schedules">My schedules</Link>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </>
+      ) : (
+        <>
+          <NavLink to="/signup" className="block md:hidden lg:hidden">
             <li>
-              <Link to="my-schedules"
-              >My schedules</Link>
+              <a>Signup</a>
             </li>
-          </ul>
-        </details>
-      </li>
+          </NavLink>
+          <NavLink className="block md:hidden lg:hidden" to="/login">
+            <li>
+              <a>Login</a>
+            </li>
+          </NavLink>
+        </>
+      )}
     </>
   );
 
@@ -161,11 +167,7 @@ const NavBar = () => {
                     tabIndex={0}
                     className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full dark:bg-white">
-                      <img
-                        src={
-                          user?.photoURL
-                        }
-                      />
+                      <img src={user?.photoURL} />
                     </div>
                   </label>
                   <ul

@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const Services = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,7 +29,18 @@ const Services = () => {
   }
 
   if (services.length === 0) {
-    return <p>No services available</p>;
+    return (
+      <>
+        <div className="text-center hover:text-pink-200 dark:text-white p-2 transition-all">
+          <p className="text-lg font-bold">
+            No services available
+            <span role="img" aria-label="sad-face">
+              😟
+            </span>
+          </p>
+        </div>
+      </>
+    );
   }
   return (
     <>
@@ -38,7 +48,7 @@ const Services = () => {
         {services.slice(0, 6).map((service) => (
           <div
             key={service._id}
-            className="flex flex-col max-w-md p-6 space-y-6 overflow-hidden rounded-lg shadow-md bg-[#eaf1ff] dark:bg-[#13103b] text-gray-100">
+            className="flex hover:animate-pulse flex-col max-w-md p-6 space-y-6 overflow-hidden rounded-lg shadow-md bg-[#eaf1ff] dark:bg-[#13103b] text-gray-100">
             <div className="flex space-x-4">
               <img
                 alt={service.providerName}
@@ -80,7 +90,7 @@ const Services = () => {
 
               <div className="space-x-2">
                 <Link
-                to={`all-services/service/${service._id}`}
+                  to={`all-services/service/${service._id}`}
                   type="button"
                   className="flex px-5 py-2 items-center rounded-md uppercase bg-[#0d0b28] space-x-1.5">
                   view details

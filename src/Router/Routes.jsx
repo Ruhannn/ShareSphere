@@ -4,16 +4,20 @@ import Login from "../LogIn_SignUp/Login";
 import Home from "../Home/Home";
 import SignUp from "../LogIn_SignUp/SignUp";
 
-import MyServices from "../Components/MyServices";
 import MySchedules from "../Components/MySchedules";
-import AddServices from "../Components/AddServices";
 import AllServices from "../Components/AllServices";
 import SingleService from "../Components/SingleService";
+import UpdateService from "../Components/UpdateService";
+import AddService from "../Components/AddServices";
+import ErrorPage from "../Components/ErrorPage";
+import PrivateRoute from "./PrivetRoute";
+import MyServices from "../Components/MyServices";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -33,27 +37,47 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-services",
-        element: <MyServices></MyServices>,
+        element: (
+          <PrivateRoute>
+            <MyServices />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-services",
-        element: <AddServices></AddServices>,
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-schedules",
-        element: <MySchedules></MySchedules>,
+        element: (
+          <PrivateRoute>
+            <MySchedules />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/all-services/service/:id",
-        element: <SingleService></SingleService>,
+        element: (
+          <PrivateRoute>
+            <SingleService></SingleService>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_BACK_END_API}/service/${params?.id}`),
       },
       {
         path: "/update-service/:id",
-        element: ,
+        element: (
+          <PrivateRoute>
+            <UpdateService />
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BACK_END_API}/update-service/${params?.id}`),
+          fetch(`${import.meta.env.VITE_BACK_END_API}/service/${params?.id}`),
       },
     ],
   },

@@ -66,8 +66,7 @@ const SignUp = () => {
       return;
     }
     createUser(email, password)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         const imageLink = imgUrl;
         handleUpdateProfile(name, imageLink).then(() => {
           navigate(from, { replace: true });

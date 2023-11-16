@@ -1,20 +1,38 @@
 import { FaBook } from "react-icons/fa";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalContent from "./ModalContent";
-import { useLoaderData } from "react-router-dom";
-
+import { Link, useLoaderData } from "react-router-dom";
+import useTitle from "../hook/useTitle";
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthContext";
 const SingleService = () => {
   const serviceData = useLoaderData();
+  const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [data, setData] = useState([]);
+  useTitle(serviceData.serviceName);
   const openModal = () => {
     setIsOpen(true);
   };
-
   const closeModal = () => {
     setIsOpen(false);
   };
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACK_END_API}/services`)
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [serviceData._id]);
+
+  const filteredData = data.filter(
+    (data) => serviceData.providerEmail === data.providerEmail
+  );
 
   return (
     <div className="m-7">
@@ -37,7 +55,8 @@ const SingleService = () => {
           <div className="flex mt-auto justify-end">
             <button
               onClick={openModal}
-              className="border dark:border-white border-black transition-all duration-500 dark:text-white text-black dra py-2 px-4 rounded-full flex items-center space-x-2 dark:hover:bg-white hover:bg-black dark:hover:text-black hover:text-white">
+              disabled={user.email === serviceData.providerEmail}
+              className={`border dark:border-white border-black transition-all duration-500 dark:text-white text-black dra py-2 px-4 rounded-full flex items-center space-x-2 dark:hover:bg-white hover:bg-black dark:hover:text-black hover:text-white ${user.email === serviceData.providerEmail && "opacity-[.3]"}`}>
               <FaBook />
               <span>Book Now</span>
             </button>
@@ -85,7 +104,10 @@ const SingleService = () => {
                             Review Info Before Book
                           </h3>
                           <div className="mt-2 flex flex-col md:flex-row lg:flex-row items-center justify-center">
-                            <ModalContent serviceData={serviceData} />
+                            <ModalContent
+                              serviceData={serviceData}
+                              closeModal={closeModal}
+                            />
                             <div className="mt-2 flex flex-col md:flex-row lg:flex-row sm:items-center justify-center">
                               <img
                                 className="w-full max-w-[450px] h-auto rounded-lg mx-auto md:max-w-[300px] lg:max-w-[400px]"
@@ -148,28 +170,31 @@ const SingleService = () => {
         </div>
         <div>
           <div className="flex flex-wrap justify-center gap-4 space-x-4">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div
-                key={index}
-                className="max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
-                <img
-                  src="https://source.unsplash.com/random/300x300/?2"
-                  alt=""
-                  className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500"
-                />
-                <div className="flex flex-col justify-between p-6 space-y-8">
-                  <div className="space-y-2">
-                    <h2 className="text-3xl font-semibold tracki">
-                      Donec lectus leo
-                    </h2>
-                    <p className="dark:text-gray-100">
-                      Curabitur luctus erat nunc, sed ullamcorper erat
-                      vestibulum eget.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+            {filteredData.map(
+              (relatedData) =>
+                relatedData._id !== serviceData._id && (
+                  <Link
+                    to={`/all-services/service/${relatedData._id}`}
+                    key={relatedData._id}
+                    className="max-w-xs rounded-md shadow-md dark:bg-gray-900 dark:text-gray-100">
+                    <img
+                      src={relatedData.pictureUrl}
+                      alt=""
+                      className="object-cover object-center w-full rounded-t-md h-72 dark:bg-gray-500"
+                    />
+                    <div className="flex flex-col justify-between p-6 space-y-8">
+                      <div className="space-y-2">
+                        <h2 className="text-3xl font-semibold tracking-wide">
+                          {relatedData.serviceName}
+                        </h2>
+                        <p className="dark:text-gray-100">
+                          {relatedData.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                )
+            )}
           </div>
         </div>
       </div>

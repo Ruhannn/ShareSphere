@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Typewriter } from "react-simple-typewriter";
+
 const FAQ = () => {
   const faqData = [
     {
@@ -32,11 +34,14 @@ const FAQ = () => {
   return (
     <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8 dark:text-[#ffffffd6]">
       <h2 className="text-2xl font-semibold sm:text-4xl">
-        Frequently Asked Questions
+        <Typewriter
+          words={["Frequently Asked Questions"]}
+          typeSpeed={70}></Typewriter>
       </h2>
       <p className="mt-4 mb-8">
-        Here, we've answered some questions that people often ask. Feel free to
-        explore!
+        <Typewriter
+          words={["Here, we've answered some questions that people often ask. Feel free to explore!"]}
+          typeSpeed={100}></Typewriter>
       </p>
       <div className="space-y-4">
         {faqData.map((item, index) => (
