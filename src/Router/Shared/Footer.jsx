@@ -9,7 +9,7 @@ const Footer = () => {
             to="/"
             className="flex justify-center space-x-3 lg:justify-start">
             <div className="flex items-center justify-center w-12 h-12 ">
-              <img src="/src/assets/bird_2.png" alt="ShareSphere" />
+              <img src="../../assets/bird_2.png" alt="ShareSphere" />
             </div>
             <span className="self-center text-2xl font-semibold">
               ShareSphere
